@@ -1,12 +1,10 @@
 package com.kentravels.app.service;
 
-import java.util.List;
-
-import com.kentravels.app.entity.User;
+import com.kentravels.app.dto.Customer;
 
 public interface UserService {
 
-	public void addUser(User user);
+	public void addUser(Customer customer);
 
-	public List<User> getAllUsers();
+//	public List<User> getAllUsers();
 }

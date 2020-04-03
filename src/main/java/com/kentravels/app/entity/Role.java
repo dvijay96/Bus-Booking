@@ -14,16 +14,9 @@ public class Role {
 
 	private String role;
 
-//	@OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
-//	private Set<User> users;
-//
-//	public Set<User> getUsers() {
-//		return users;
-//	}
-//
-//	public void setUsers(Set<User> users) {
-//		this.users = users;
-//	}
+	public Role(String role) {
+		this.role = role;
+	}
 
 	public int getRoleId() {
 		return roleId;

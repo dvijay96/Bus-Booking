@@ -42,7 +42,6 @@ public class User {
 	private String password;
 
 	@ManyToOne(cascade = CascadeType.ALL)
-//	@JoinColumn(name="role_Id")
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Role role;
 

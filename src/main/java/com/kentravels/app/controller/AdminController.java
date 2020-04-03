@@ -11,23 +11,23 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kentravels.app.entity.User;
-import com.kentravels.app.service.UserService;
+import com.kentravels.app.service.AdminService;
 
 @RestController
 public class AdminController {
 
 	@Autowired
-	private UserService userService;
+	private AdminService admin;
 
 	@PostMapping("/user/add")
 	public ResponseEntity<User> addUser(@RequestBody User user) {
 
-		userService.addUser(user);
+		admin.addUser(user);
 		return new ResponseEntity<User>(user, HttpStatus.ACCEPTED);
 	}
 
 	@GetMapping("/user/all")
 	public ResponseEntity<List<User>> getAllUsers() {
-		return new ResponseEntity<List<User>>(userService.getAllUsers(), HttpStatus.FOUND);
+		return new ResponseEntity<List<User>>(admin.getAllUsers(), HttpStatus.FOUND);
 	}
 }

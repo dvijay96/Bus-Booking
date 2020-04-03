@@ -13,5 +13,5 @@ import com.kentravels.app.entity.Role;
 public interface RoleRepo extends JpaRepository<Role, Integer> {
 
 	@Query("From Role where role=:role")
-	public Role findByRole(String role); //throws Exception;
+	public Role findByRole(String role); 
 }
