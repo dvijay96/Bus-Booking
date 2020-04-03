@@ -3,6 +3,7 @@ package com.kentravels.app.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.kentravels.app.entity.Role;
@@ -29,6 +30,8 @@ public class AdminServiceImpl implements AdminService {
 			roleService.saveRole(role);
 		}
 
+		BCryptPasswordEncoder encoder=new BCryptPasswordEncoder();
+		user.setPassword(encoder.encode(user.getPassword()));
 		userRepo.save(user);
 
 	}

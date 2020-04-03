@@ -21,8 +21,8 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private User user;
 
-	@Autowired
-	private BCryptPasswordEncoder encoder;
+//	@Autowired
+//	private BCryptPasswordEncoder encoder;
 
 	@Override
 	public void addUser(Customer customer) {
@@ -31,6 +31,8 @@ public class UserServiceImpl implements UserService {
 		user.setLastName(customer.getLastName());
 		user.setDOB(customer.getDOB());
 		user.setUsername(customer.getUsername());
+
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		user.setPassword(encoder.encode(customer.getPassword()));
 		user.setGender(customer.getGender());
 
