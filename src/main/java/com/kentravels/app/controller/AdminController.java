@@ -62,7 +62,7 @@ public class AdminController {
 	// Route Service
 
 	@PostMapping("/route/add")
-	public String addRoute(Route route) {
+	public String addRoute(@RequestBody Route route) {
 		return admin.addRoute(route);
 	}
 
