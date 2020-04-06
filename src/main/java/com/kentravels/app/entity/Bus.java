@@ -7,9 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -40,9 +37,9 @@ public class Bus {
 
 	private int fare;
 
-	@ManyToOne
-	@JoinTable(name = "bus_route", joinColumns = @JoinColumn(name = "bus_id"), inverseJoinColumns = @JoinColumn(name = "route_id"))
-	private Route route;
+//	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+//	@JoinTable(name = "bus_route", joinColumns = @JoinColumn(name = "bus_id"), inverseJoinColumns = @JoinColumn(name = "route_id"))
+//	private Route route;
 
 	public int getBusId() {
 		return busId;
@@ -92,12 +89,12 @@ public class Bus {
 		this.fare = fare;
 	}
 
-	public Route getRoute() {
-		return route;
-	}
-
-	public void setRoute(Route route) {
-		this.route = route;
-	}
+//	public Route getRoute() {
+//		return route;
+//	}
+//
+//	public void setRoute(Route route) {
+//		this.route = route;
+//	}
 
 }

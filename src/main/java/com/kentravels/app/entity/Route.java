@@ -1,9 +1,15 @@
 package com.kentravels.app.entity;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
 @Entity
@@ -19,6 +25,18 @@ public class Route {
 	private String destinationCity;
 
 	private int distance;
+
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "route_bus", joinColumns = @JoinColumn(name = "route_id"), inverseJoinColumns = @JoinColumn(name = "bus_id"))
+	private Set<Bus> buses;
+
+	public Set<Bus> getBuses() {
+		return buses;
+	}
+
+	public void setBuses(Set<Bus> buses) {
+		this.buses = buses;
+	}
 
 	public int getRouteId() {
 		return routeId;
