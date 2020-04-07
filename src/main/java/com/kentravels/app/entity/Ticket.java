@@ -1,19 +1,16 @@
 package com.kentravels.app.entity;
 
 import java.util.Date;
-import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 
 @Entity
 public class Ticket {
@@ -24,27 +21,28 @@ public class Ticket {
 	private int seats;
 
 	@Temporal(TemporalType.DATE)
-	@JsonFormat(shape = Shape.STRING, pattern = "dd/MM/yyyy")
 	private Date date;
 
 	private int totalFare;
 
-	private int busId;
+	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@JoinTable(name = "ticket_bus", joinColumns = @JoinColumn(name = "ticket_id"), inverseJoinColumns = @JoinColumn(name = "bus_id"))
+	private Bus bus;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinTable(name = "ticket_route", joinColumns = @JoinColumn(name = "ticket_id"), inverseJoinColumns = @JoinColumn(name = "route_id"))
 	private Route route;
 
-	@ManyToMany
-	private Set<Passenger> passengers;
-
-	public Set<Passenger> getPassengers() {
-		return passengers;
-	}
-
-	public void setPassengers(Set<Passenger> passengers) {
-		this.passengers = passengers;
-	}
+//	@ManyToOne
+//	private Set<Passenger> passengers;
+//
+//	public Set<Passenger> getPassengers() {
+//		return passengers;
+//	}
+//
+//	public void setPassengers(Set<Passenger> passengers) {
+//		this.passengers = passengers;
+//	}
 
 	public int getTicketId() {
 		return ticketId;
@@ -76,14 +74,6 @@ public class Ticket {
 
 	public void setTotalFare(int totalFare) {
 		this.totalFare = totalFare;
-	}
-
-	public int getBusId() {
-		return busId;
-	}
-
-	public void setBusId(int busId) {
-		this.busId = busId;
 	}
 
 	public Route getRoute() {

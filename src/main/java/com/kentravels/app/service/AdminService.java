@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.kentravels.app.entity.User;
 
-public interface AdminService extends BusService,RouteService {
+public interface AdminService {
 
 	public void addUser(User user);
 	

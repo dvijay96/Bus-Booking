@@ -1,4 +1,4 @@
-package com.kentravels.app.service;
+package com.kentravels.app.service.impl;
 
 import java.util.List;
 
@@ -6,11 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.kentravels.app.entity.Bus;
 import com.kentravels.app.entity.Role;
-import com.kentravels.app.entity.Route;
 import com.kentravels.app.entity.User;
 import com.kentravels.app.repository.UserRepo;
+import com.kentravels.app.service.AdminService;
+import com.kentravels.app.service.RoleService;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -20,9 +20,6 @@ public class AdminServiceImpl implements AdminService {
 
 	@Autowired
 	private UserRepo userRepo;
-
-	@Autowired
-	private RouteService routeService;
 
 	// Admin /User services
 
@@ -83,28 +80,48 @@ public class AdminServiceImpl implements AdminService {
 		return "password reseted as user firstName+123";
 	}
 
-	// Bus Services
-
-	@Override
-	public void addBus(Bus bus) {
-
-	}
-
 	// Route Services
 
-	@Override
-	public String addRoute(Route route) {
-		return routeService.addRoute(route);
-	}
-
-	@Override
-	public Route getRoute(String origin, String destination) {
-		return routeService.getRoute(origin, destination);
-	}
-
-	@Override
-	public String deleteRoute(int id) {
-		return routeService.deleteRoute(id);
-	}
+//	
+//	public String addRoute(Route route) {
+//		return routeService.addRoute(route);
+//	}
+//
+//	@Override
+//	public Route getRoute(String origin, String destination) {
+//		return routeService.getRoute(origin, destination);
+//	}
+//
+//	@Override
+//	public String deleteRoute(int id) {
+//		return routeService.deleteRoute(id);
+//	}
+//
+//	// Bus Services
+//
+//	@Override
+//	public void addBus(Bus bus) {
+//		busService.addBus(bus);
+//	}
+//
+//	@Override
+//	public String deleteBus(int id) {
+//		return busService.deleteBus(id);
+//	}
+//
+//	@Override
+//	public String updateBus(Bus bus) {
+//		return busService.updateBus(bus);
+//	}
+//
+//	@Override
+//	public Optional<Bus> getBus(int id) {
+//		return busService.getBus(id);
+//	}
+//
+//	@Override
+//	public List<Bus> viewAllBuses() {
+//		return busService.viewAllBuses();
+//	}
 
 }

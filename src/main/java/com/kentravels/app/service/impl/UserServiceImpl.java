@@ -1,13 +1,21 @@
-package com.kentravels.app.service;
+package com.kentravels.app.service.impl;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.kentravels.app.dto.BusSearch;
 import com.kentravels.app.dto.Customer;
+import com.kentravels.app.entity.Bus;
 import com.kentravels.app.entity.Role;
+import com.kentravels.app.entity.Ticket;
 import com.kentravels.app.entity.User;
 import com.kentravels.app.repository.UserRepo;
+import com.kentravels.app.service.RoleService;
+import com.kentravels.app.service.RouteService;
+import com.kentravels.app.service.UserService;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -20,6 +28,12 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private User user;
+	
+	@Autowired
+	private RouteService routeService;
+	
+//	@Autowired
+//	private TicketService ticket;
 
 //	@Autowired
 //	private BCryptPasswordEncoder encoder;
@@ -47,10 +61,15 @@ public class UserServiceImpl implements UserService {
 		userRepo.save(user);
 	}
 
-//	@Override
-//	public List<User> getAllUsers() {
-//
-//		return userRepo.findAll();
-//	}
+	@Override
+	public List<Bus> searchBuses(BusSearch search) {
+		return null;
+	}
+
+	@Override
+	public Ticket bookTicket() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

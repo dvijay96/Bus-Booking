@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kentravels.app.entity.Route;
 import com.kentravels.app.entity.User;
 import com.kentravels.app.service.AdminService;
 
@@ -59,15 +58,4 @@ public class AdminController {
 		return admin.resetUserPassword(id);
 	}
 
-	// Route Service
-
-	@PostMapping("/route/add")
-	public String addRoute(@RequestBody Route route) {
-		return admin.addRoute(route);
-	}
-
-	@DeleteMapping("/route/delete/{id}")
-	public String deleteRoute(@PathVariable int id) {
-		return admin.deleteRoute(id);
-	}
 }
