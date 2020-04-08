@@ -10,6 +10,10 @@ import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 
 public class BusInfo {
 
+	private int busId;
+
+	private String name;
+
 	private String type;
 
 	private int seats;
@@ -62,6 +66,22 @@ public class BusInfo {
 
 	public void setFare(int fare) {
 		this.fare = fare;
+	}
+
+	public int getBusId() {
+		return busId;
+	}
+
+	public void setBusId(int busId) {
+		this.busId = busId;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

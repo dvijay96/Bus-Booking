@@ -1,11 +1,13 @@
 package com.kentravels.app.service.impl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kentravels.app.dto.BusSearch;
 import com.kentravels.app.entity.Bus;
 import com.kentravels.app.repository.BusRepo;
 import com.kentravels.app.service.BusService;
@@ -46,6 +48,17 @@ public class BusServiceImpl implements BusService {
 	@Override
 	public Optional<Bus> getBus(int id) {
 		return repo.findById(id);
+	}
+
+	@Override
+	public void deleteBus(Date date) {
+		repo.deleteBuses(date);
+
+	}
+
+	@Override
+	public List<Bus> searchBuses(BusSearch bus) {
+		return repo.searchBuses(bus.getOrigin(), bus.getDestination(), bus.getDate());
 	}
 
 }

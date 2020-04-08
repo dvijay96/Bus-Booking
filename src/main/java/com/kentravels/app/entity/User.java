@@ -1,6 +1,7 @@
 package com.kentravels.app.entity;
 
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -44,6 +46,18 @@ public class User {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Role role;
+
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "user_ticket", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "ticket_id"))
+	private Set<Ticket> bookings;
+
+	public Set<Ticket> getBookings() {
+		return bookings;
+	}
+
+	public void setBookings(Set<Ticket> bookings) {
+		this.bookings = bookings;
+	}
 
 	public int getUserId() {
 		return userId;

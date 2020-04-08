@@ -12,7 +12,7 @@ import com.kentravels.app.dto.BusSearch;
 import com.kentravels.app.service.UserService;
 
 @RestController
-@RequestMapping("secured/customer")
+@RequestMapping("/secured/api")
 public class UserController {
 
 	@Autowired

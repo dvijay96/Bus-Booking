@@ -2,13 +2,11 @@ package com.kentravels.app.entity;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -18,31 +16,29 @@ public class Ticket {
 	@Id
 	private int ticketId;
 
-	private int seats;
+//	private int seats;
 
 	@Temporal(TemporalType.DATE)
 	private Date date;
 
-	private int totalFare;
+	private int fare;
 
-	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-	@JoinTable(name = "ticket_bus", joinColumns = @JoinColumn(name = "ticket_id"), inverseJoinColumns = @JoinColumn(name = "bus_id"))
-	private Bus bus;
+	@Column(name = "Bus_Name")
+	private String busName;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinTable(name = "ticket_route", joinColumns = @JoinColumn(name = "ticket_id"), inverseJoinColumns = @JoinColumn(name = "route_id"))
+	@Temporal(TemporalType.TIME)
+	private Date departure;
+
+	@Temporal(TemporalType.TIME)
+	private Date arrival;
+
+	@OneToOne
+	@JoinColumn(name = "passenger_id")
+	private Passenger passenger;
+
+	@OneToOne
+	@JoinColumn(name = "route_id")
 	private Route route;
-
-//	@ManyToOne
-//	private Set<Passenger> passengers;
-//
-//	public Set<Passenger> getPassengers() {
-//		return passengers;
-//	}
-//
-//	public void setPassengers(Set<Passenger> passengers) {
-//		this.passengers = passengers;
-//	}
 
 	public int getTicketId() {
 		return ticketId;
@@ -52,28 +48,44 @@ public class Ticket {
 		this.ticketId = ticketId;
 	}
 
-	public int getSeats() {
-		return seats;
-	}
-
-	public void setSeats(int seats) {
-		this.seats = seats;
-	}
+//	public int getSeats() {
+//		return seats;
+//	}
+//
+//	public void setSeats(int seats) {
+//		this.seats = seats;
+//	}
 
 	public Date getDate() {
 		return date;
 	}
 
+	public int getFare() {
+		return fare;
+	}
+
+	public void setFare(int fare) {
+		this.fare = fare;
+	}
+
+	public Date getDeparture() {
+		return departure;
+	}
+
+	public void setDeparture(Date departure) {
+		this.departure = departure;
+	}
+
+	public Date getArrival() {
+		return arrival;
+	}
+
+	public void setArrival(Date arrival) {
+		this.arrival = arrival;
+	}
+
 	public void setDate(Date date) {
 		this.date = date;
-	}
-
-	public int getTotalFare() {
-		return totalFare;
-	}
-
-	public void setTotalFare(int totalFare) {
-		this.totalFare = totalFare;
 	}
 
 	public Route getRoute() {
@@ -82,6 +94,22 @@ public class Ticket {
 
 	public void setRoute(Route route) {
 		this.route = route;
+	}
+
+	public String getBusName() {
+		return busName;
+	}
+
+	public void setBusName(String busName) {
+		this.busName = busName;
+	}
+
+	public Passenger getPassenger() {
+		return passenger;
+	}
+
+	public void setPassenger(Passenger passenger) {
+		this.passenger = passenger;
 	}
 
 }

@@ -1,12 +1,20 @@
 package com.kentravels.app.entity;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,6 +32,8 @@ public class Bus {
 
 	private String type;
 
+	private String name;
+
 	@Column(precision = 2)
 	private int availableSeats;
 
@@ -37,9 +47,33 @@ public class Bus {
 
 	private int fare;
 
-//	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-//	@JoinTable(name = "bus_route", joinColumns = @JoinColumn(name = "bus_id"), inverseJoinColumns = @JoinColumn(name = "route_id"))
-//	private Route route;
+	@Temporal(TemporalType.DATE)
+	@JsonFormat(shape = Shape.STRING, pattern = "dd/MM/yyyy")
+	private Date date;
+
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(name = "bus_route", joinColumns = @JoinColumn(name = "bus_id"), inverseJoinColumns = @JoinColumn(name = "route_id"))
+	private Route route;
+
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "bus_passenger", joinColumns = @JoinColumn(name = "bus_id"), inverseJoinColumns = @JoinColumn(name = "passenger_id"))
+	private Set<Passenger> passengers = new HashSet<>();
+
+	public Set<Passenger> getPassengers() {
+		return passengers;
+	}
+
+	public void setPassengers(Set<Passenger> passengers) {
+		this.passengers = passengers;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
 
 	public int getBusId() {
 		return busId;
@@ -89,12 +123,20 @@ public class Bus {
 		this.fare = fare;
 	}
 
-//	public Route getRoute() {
-//		return route;
-//	}
-//
-//	public void setRoute(Route route) {
-//		this.route = route;
-//	}
+	public Route getRoute() {
+		return route;
+	}
+
+	public void setRoute(Route route) {
+		this.route = route;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 }

@@ -19,7 +19,7 @@ import com.kentravels.app.entity.Route;
 import com.kentravels.app.service.RouteService;
 
 @RestController
-@RequestMapping("secured/admin")
+@RequestMapping("/secured/api")
 public class RouteController {
 
 	@Autowired
