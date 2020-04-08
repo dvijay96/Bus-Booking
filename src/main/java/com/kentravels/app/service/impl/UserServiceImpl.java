@@ -28,10 +28,10 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private User user;
-	
+
 	@Autowired
 	private RouteService routeService;
-	
+
 //	@Autowired
 //	private TicketService ticket;
 
@@ -39,26 +39,31 @@ public class UserServiceImpl implements UserService {
 //	private BCryptPasswordEncoder encoder;
 
 	@Override
-	public void addUser(Customer customer) {
+	public String addUser(Customer customer) {
 
-		user.setFirstName(customer.getFirstName());
-		user.setLastName(customer.getLastName());
-		user.setDOB(customer.getDOB());
-		user.setUsername(customer.getUsername());
+		try {
+			user.setFirstName(customer.getFirstName());
+			user.setLastName(customer.getLastName());
+			user.setDOB(customer.getDOB());
+			user.setUsername(customer.getUsername());
 
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		user.setPassword(encoder.encode(customer.getPassword()));
-		user.setGender(customer.getGender());
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+			user.setPassword(encoder.encode(customer.getPassword()));
+			user.setGender(customer.getGender());
 
-		Role role = roleService.findRole("USER");
-		if (role != null) {
-			user.setRole(role);
-			roleService.saveRole(role);
-		} else {
-			role = new Role("USER");
-			user.setRole(role);
+			Role role = roleService.findRole("USER");
+			if (role != null) {
+				user.setRole(role);
+				roleService.saveRole(role);
+			} else {
+				role = new Role("USER");
+				user.setRole(role);
+			}
+			userRepo.save(user);
+			return customer.getFirstName() + " saved";
+		} catch (Exception e) {
+			return e.getLocalizedMessage();
 		}
-		userRepo.save(user);
 	}
 
 	@Override

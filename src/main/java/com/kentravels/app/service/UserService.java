@@ -9,7 +9,7 @@ import com.kentravels.app.entity.Ticket;
 
 public interface UserService {
 
-	public void addUser(Customer customer);
+	public String addUser(Customer customer);
 	
 	public List<Bus> searchBuses(BusSearch search);
 	

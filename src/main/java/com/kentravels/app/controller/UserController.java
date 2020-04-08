@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kentravels.app.dto.BusSearch;
+import com.kentravels.app.dto.Customer;
 import com.kentravels.app.service.UserService;
 
 @RestController
@@ -26,6 +27,11 @@ public class UserController {
 	@GetMapping("/search/bookings")
 	public ResponseEntity<?> checkBookings(@RequestBody BusSearch booking) {
 		return null;
+	}
+	
+	@PostMapping("/user/register")
+	public String addUser(@RequestBody Customer cust) {
+		return service.addUser(cust);
 	}
 
 }
