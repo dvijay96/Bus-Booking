@@ -33,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable();
 		http.authorizeRequests()
 		.antMatchers("**/api/**").authenticated()
-		.anyRequest().permitAll().and().httpBasic();
+		.anyRequest().hasAnyRole("ADMIN","USER").and().httpBasic();
 	}
 
 	@Bean
