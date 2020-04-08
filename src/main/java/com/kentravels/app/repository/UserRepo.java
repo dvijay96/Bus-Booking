@@ -11,4 +11,5 @@ import com.kentravels.app.entity.User;
 @Transactional
 public interface UserRepo extends JpaRepository<User, Integer> {
 
+	public User findByUsername(String username);
 }
