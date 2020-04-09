@@ -16,15 +16,15 @@ public class BusInfo {
 	private int seats;
 
 //	@Temporal(TemporalType.TIME)
-	@JsonFormat(shape = Shape.STRING, pattern = "HH:mm")
+	@JsonFormat(shape = Shape.STRING, pattern = "HH:mm",timezone = "Asia/Kolkata")
 	private Date arrivalTime;
 
 //	@Temporal(TemporalType.TIME)
-	@JsonFormat(shape = Shape.STRING, pattern = "HH:mm")
+	@JsonFormat(shape = Shape.STRING, pattern = "HH:mm",timezone = "Asia/Kolkata")
 	private Date departureTime;
 
 //	@Temporal(TemporalType.DATE)
-	@JsonFormat(shape = Shape.STRING, pattern = "dd/MM/yyyy")
+	@JsonFormat(shape = Shape.STRING, pattern = "dd/MM/yyyy",timezone = "Asia/Kolkata")
 	private Date date;
 
 	private int fare;
