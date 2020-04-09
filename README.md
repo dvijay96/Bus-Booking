@@ -31,15 +31,13 @@ Demo project on bus booking
 #BUS ADD |/\/\/\| UPDATE for name,date, times , fare, seats
 
 {
-	"name":"",
-	"type":"",
-	"seats":"",
-	"arrivalTime":"",
-	"departureTime":"",
-	"date":"",
-	"fare":"",
-	"origin":"",
-	"destination:""
+	 "type": "",
+     "name": "",
+     "availableSeats": 0,
+     "arrivalTime": "",
+     "departureTime": "",
+     "fare": 700,
+     "date": ""
 }
 
 #BUS Search

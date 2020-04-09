@@ -9,7 +9,7 @@ import com.kentravels.app.entity.Route;
 @Repository
 public interface RouteRepo extends JpaRepository<Route, Integer> {
 
-	@Query("From Route where orginCity=:origin and destinationCity=:destination")
+	@Query("From Route where originCity=:origin and destinationCity=:destination")
 	public Route findByCities(String origin, String destination);
 	
 }
