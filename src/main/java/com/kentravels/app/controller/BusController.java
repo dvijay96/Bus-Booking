@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kentravels.app.dto.BusInfo;
@@ -72,7 +73,7 @@ public class BusController {
 	}
 
 	@PutMapping("/bus/add_route")
-	public String addBusRoute(String origin,String destination, int id) {
+	public String addBusRoute(@RequestParam String origin, @RequestParam String destination, @RequestParam int id) {
 		return service.addBusRoute(origin, destination, id);
 	}
 //	protected BusController() {
