@@ -27,9 +27,6 @@ public class UserServiceImpl implements UserService {
 	private RoleService roleService;
 
 	@Autowired
-	private User user;
-
-	@Autowired
 	private BusService busService;
 
 //	@Autowired
@@ -42,6 +39,7 @@ public class UserServiceImpl implements UserService {
 	public String addUser(Customer customer) {
 
 		try {
+			User user=new User();
 			user.setFirstName(customer.getFirstName());
 			user.setLastName(customer.getLastName());
 			user.setDOB(customer.getDOB());

@@ -19,9 +19,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonFormat.Shape;
-
 @Entity
 public class Bus {
 
@@ -38,17 +35,17 @@ public class Bus {
 	private int availableSeats;
 
 	@Temporal(TemporalType.TIME)
-	@JsonFormat(shape = Shape.STRING, pattern = "HH:mm")
+//	@JsonFormat(shape = Shape.STRING, pattern = "HH:mm")
 	private Date arrivalTime;
 
 	@Temporal(TemporalType.TIME)
-	@JsonFormat(shape = Shape.STRING, pattern = "HH:mm")
+//	@JsonFormat(shape = Shape.STRING, pattern = "HH:mm")
 	private Date departureTime;
 
 	private int fare;
 
 	@Temporal(TemporalType.DATE)
-	@JsonFormat(shape = Shape.STRING, pattern = "dd/MM/yyyy")
+//	@JsonFormat(shape = Shape.STRING, pattern = "dd/MM/yyyy")
 	private Date date;
 
 	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)

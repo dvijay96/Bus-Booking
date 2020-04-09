@@ -11,16 +11,18 @@ import com.kentravels.app.entity.Bus;
 public interface BusService {
 
 	public void addBus(BusInfo bus);
-	
+
 	public String deleteBus(int id);
-	
+
 	public String updateBus(Bus bus);
-	
+
 	public Optional<Bus> getBus(int id);
-	
-	public List<Bus> viewAllBuses(); 
-	
+
+	public List<Bus> viewAllBuses();
+
 	public void deleteBus(Date date);
-	
+
 	public List<Bus> searchBuses(BusSearch bus);
+
+	public String addBusRoute(String origin, String destination, int busId);
 }

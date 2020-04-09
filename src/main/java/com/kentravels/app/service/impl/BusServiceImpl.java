@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.kentravels.app.dto.BusInfo;
 import com.kentravels.app.dto.BusSearch;
 import com.kentravels.app.entity.Bus;
+import com.kentravels.app.entity.Route;
 import com.kentravels.app.repository.BusRepo;
 import com.kentravels.app.service.BusService;
 import com.kentravels.app.service.RouteService;
@@ -23,19 +24,18 @@ public class BusServiceImpl implements BusService {
 	@Autowired
 	private RouteService routeService;
 
-	@Autowired
-	private Bus bus;
-
 	@Override
 	public void addBus(BusInfo bus) {
-		this.bus.setType(bus.getType());
-		this.bus.setName(bus.getName());
-		this.bus.setDate(bus.getDate());
-		this.bus.setArrivalTime(bus.getArrivalTime());
-		this.bus.setDepartureTime(bus.getDepartureTime());
-		this.bus.setAvailableSeats(bus.getSeats());
-		this.bus.setFare(bus.getFare());
-		repo.save(this.bus);
+
+		Bus newBus = new Bus();
+		newBus.setType(bus.getType());
+		newBus.setName(bus.getName());
+		newBus.setDate(bus.getDate());
+		newBus.setArrivalTime(bus.getArrivalTime());
+		newBus.setDepartureTime(bus.getDepartureTime());
+		newBus.setAvailableSeats(bus.getSeats());
+		newBus.setFare(bus.getFare());
+		repo.save(newBus);
 	}
 
 	@Override
@@ -74,6 +74,23 @@ public class BusServiceImpl implements BusService {
 	@Override
 	public List<Bus> searchBuses(BusSearch bus) {
 		return repo.searchBuses(bus.getOrigin(), bus.getDestination(), bus.getDate());
+	}
+
+	@Override
+	public String addBusRoute(String origin, String destination, int busId) {
+		try {
+			
+			Route route=routeService.getRoute(origin, destination);
+			if(route==null) {
+				return "No such route exists";
+			}
+			Bus bus=repo.findById(busId).get();
+			bus.setRoute(route);
+			repo.save(bus);
+			return "Bus_no: "+busId+" added for "+route.getOriginCity()+" --> "+route.getDestinationCity();
+		} catch (Exception e) {
+			return e.getLocalizedMessage();
+		}
 	}
 
 }
