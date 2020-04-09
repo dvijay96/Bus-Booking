@@ -28,7 +28,7 @@ public class BusController {
 	private BusService service;
 
 	@PostMapping("admin/bus/add")
-	public void addBus(Bus bus) {
+	public void addBus(@RequestBody BusInfo bus) {
 		service.addBus(bus);
 	}
 

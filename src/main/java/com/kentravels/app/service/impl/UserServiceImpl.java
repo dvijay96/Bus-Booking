@@ -13,8 +13,8 @@ import com.kentravels.app.entity.Role;
 import com.kentravels.app.entity.Ticket;
 import com.kentravels.app.entity.User;
 import com.kentravels.app.repository.UserRepo;
+import com.kentravels.app.service.BusService;
 import com.kentravels.app.service.RoleService;
-import com.kentravels.app.service.RouteService;
 import com.kentravels.app.service.UserService;
 
 @Service
@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
 	private User user;
 
 	@Autowired
-	private RouteService routeService;
+	private BusService busService;
 
 //	@Autowired
 //	private TicketService ticket;
@@ -68,7 +68,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<Bus> searchBuses(BusSearch search) {
-		return null;
+		return busService.searchBuses(search);
 	}
 
 	@Override

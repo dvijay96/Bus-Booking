@@ -7,10 +7,12 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kentravels.app.dto.BusInfo;
 import com.kentravels.app.dto.BusSearch;
 import com.kentravels.app.entity.Bus;
 import com.kentravels.app.repository.BusRepo;
 import com.kentravels.app.service.BusService;
+import com.kentravels.app.service.RouteService;
 
 @Service
 public class BusServiceImpl implements BusService {
@@ -18,9 +20,22 @@ public class BusServiceImpl implements BusService {
 	@Autowired
 	private BusRepo repo;
 
+	@Autowired
+	private RouteService routeService;
+
+	@Autowired
+	private Bus bus;
+
 	@Override
-	public void addBus(Bus bus) {
-		repo.save(bus);
+	public void addBus(BusInfo bus) {
+		this.bus.setType(bus.getType());
+		this.bus.setName(bus.getName());
+		this.bus.setDate(bus.getDate());
+		this.bus.setArrivalTime(bus.getArrivalTime());
+		this.bus.setDepartureTime(bus.getDepartureTime());
+		this.bus.setAvailableSeats(bus.getSeats());
+		this.bus.setFare(bus.getFare());
+		repo.save(this.bus);
 	}
 
 	@Override

@@ -32,6 +32,17 @@ public class Route {
 //		this.buses = buses;
 //	}
 
+	public Route(String originCity, String destinationCity, int distance) {
+		super();
+		this.originCity = originCity;
+		this.destinationCity = destinationCity;
+		this.distance = distance;
+	}
+
+	public Route() {
+
+	}
+
 	public int getRouteId() {
 		return routeId;
 	}

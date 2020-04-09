@@ -23,10 +23,11 @@ public class MyUserDetail implements UserDetails {
 		super();
 		this.user = user;
 	}
-	
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return Arrays.asList(new SimpleGrantedAuthority("ROLE_"+user.getRole().getRole()));
+		String role = user.getRole().getRole();
+		return Arrays.asList(new SimpleGrantedAuthority("ROLE_" + role));
 	}
 
 	@Override

@@ -4,12 +4,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import com.kentravels.app.dto.BusInfo;
 import com.kentravels.app.dto.BusSearch;
 import com.kentravels.app.entity.Bus;
 
 public interface BusService {
 
-	public void addBus(Bus bus);
+	public void addBus(BusInfo bus);
 	
 	public String deleteBus(int id);
 	
