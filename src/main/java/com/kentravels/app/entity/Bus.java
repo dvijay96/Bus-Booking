@@ -51,7 +51,7 @@ public class Bus {
 	@JsonFormat(shape = Shape.STRING, pattern = "dd/MM/yyyy")
 	private Date date;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	@JoinTable(name = "bus_route", joinColumns = @JoinColumn(name = "bus_id"), inverseJoinColumns = @JoinColumn(name = "route_id"))
 	private Route route;
 
