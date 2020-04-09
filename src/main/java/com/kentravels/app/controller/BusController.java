@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,22 +23,23 @@ import com.kentravels.app.service.BusService;
 
 @RestController
 @RequestMapping("/secured/api")
+@PreAuthorize("hasAnyRole('ADMIN')")
 public class BusController {
 
 	@Autowired
 	private BusService service;
 
-	@PostMapping("admin/bus/add")
+	@PostMapping("/bus/add")
 	public void addBus(@RequestBody BusInfo bus) {
 		service.addBus(bus);
 	}
 
-	@DeleteMapping("admin/bus/delete")
+	@DeleteMapping("/bus/delete")
 	public String deleteBus(int id) {
 		return service.deleteBus(id);
 	}
 
-	@PutMapping("admin/bus/update")
+	@PutMapping("/bus/update")
 	public String updateBus(Bus bus) {
 		return service.updateBus(bus);
 	}
@@ -47,7 +49,7 @@ public class BusController {
 		return new ResponseEntity<>(service.getBus(id), HttpStatus.FOUND);
 	}
 
-	@GetMapping("admin/bus/all")
+	@GetMapping("/bus/all")
 	public List<Bus> viewAllBuses() {
 		return service.viewAllBuses();
 	}
@@ -69,6 +71,10 @@ public class BusController {
 		return buses;
 	}
 
+	@PutMapping("/bus/add_route")
+	public String addBusRoute(String origin,String destination, int id) {
+		return service.addBusRoute(origin, destination, id);
+	}
 //	protected BusController() {
 //		service.deleteBus(new Date(System.currentTimeMillis()));
 //	}

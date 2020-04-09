@@ -2,9 +2,6 @@ package com.kentravels.app.dto;
 
 import java.util.Date;
 
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 
@@ -18,15 +15,15 @@ public class BusInfo {
 
 	private int seats;
 
-	@Temporal(TemporalType.TIME)
+//	@Temporal(TemporalType.TIME)
 	@JsonFormat(shape = Shape.STRING, pattern = "HH:mm")
 	private Date arrivalTime;
 
-	@Temporal(TemporalType.TIME)
+//	@Temporal(TemporalType.TIME)
 	@JsonFormat(shape = Shape.STRING, pattern = "HH:mm")
 	private Date departureTime;
 
-	@Temporal(TemporalType.DATE)
+//	@Temporal(TemporalType.DATE)
 	@JsonFormat(shape = Shape.STRING, pattern = "dd/MM/yyyy")
 	private Date date;
 
