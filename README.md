@@ -40,12 +40,12 @@ Demo project on bus booking
      "date": ""
 }
 
-#BUS Search
+#BUS_ROUTE Addition
 
 {
 	"origin":"",
 	"destination:"",
-	"date":""
+	"busId":""
 }
 
 

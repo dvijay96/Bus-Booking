@@ -1,10 +1,18 @@
 package com.kentravels.app.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
 @Entity
@@ -26,10 +34,14 @@ public class Passenger {
 
 	@Column(precision = 10)
 	private long mobileNo;
+	
+	@ManyToMany(cascade = CascadeType.PERSIST)
+	@JoinTable(name = "passenger_bus", joinColumns = @JoinColumn(name = "passenger_id"), inverseJoinColumns = @JoinColumn(name = "bus_id"))
+	private Set<Bus> buses=new HashSet<>();
 
-//	@OneToMany
-//	@JoinTable(name = "passenger_ticket", joinColumns = @JoinColumn(name = "passenger_id"), inverseJoinColumns = @JoinColumn(name = "ticket_id"))
-//	private Set<Ticket> tickets;
+	@OneToMany
+	@JoinTable(name = "passenger_ticket", joinColumns = @JoinColumn(name = "passenger_id"), inverseJoinColumns = @JoinColumn(name = "ticket_id"))
+	private Set<Ticket> tickets;
 
 	public int getPassengerId() {
 		return passengerId;
@@ -79,12 +91,20 @@ public class Passenger {
 		this.mobileNo = mobileNo;
 	}
 
-//	public Set<Ticket> getTickets() {
-//		return tickets;
-//	}
-//
-//	public void setTickets(Set<Ticket> tickets) {
-//		this.tickets = tickets;
-//	}
+	public Set<Ticket> getTickets() {
+		return tickets;
+	}
+
+	public void setTickets(Set<Ticket> tickets) {
+		this.tickets = tickets;
+	}
+
+	public Set<Bus> getBuses() {
+		return buses;
+	}
+
+	public void setBuses(Set<Bus> buses) {
+		this.buses = buses;
+	}
 
 }

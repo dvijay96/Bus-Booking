@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kentravels.app.dto.BusInfo;
+import com.kentravels.app.dto.BusRoute;
 import com.kentravels.app.entity.Bus;
 import com.kentravels.app.service.BusService;
 
@@ -58,7 +59,7 @@ public class BusController {
 		return service.viewAllBuses();
 	}
 
-	@GetMapping("/search")
+	@GetMapping("/bus/search")
 	public Object searchBus(@RequestParam String origin, @RequestParam String destination, @RequestParam String date) {
 		try {
 			List<BusInfo> buses = new ArrayList<>();
@@ -82,8 +83,8 @@ public class BusController {
 
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PutMapping("/bus/add_route")
-	public String addBusRoute(@RequestParam String origin, @RequestParam String destination, @RequestParam int id) {
-		return service.addBusRoute(origin, destination, id);
+	public String addBusRoute(@RequestBody BusRoute add) {
+		return service.addBusRoute(add.getOrigin(), add.getDestination(), add.getBusId());
 	}
 //	protected BusController() {
 //		service.deleteBus(new Date(System.currentTimeMillis()));
