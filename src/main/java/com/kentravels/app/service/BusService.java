@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Optional;
 
 import com.kentravels.app.dto.BusInfo;
-import com.kentravels.app.dto.BusSearch;
 import com.kentravels.app.entity.Bus;
 
 public interface BusService {
@@ -22,7 +21,7 @@ public interface BusService {
 
 	public void deleteBus(Date date);
 
-	public List<Bus> searchBuses(BusSearch bus);
+	public List<Bus> searchBuses(String origin, String destination,String date) throws Exception;
 
 	public String addBusRoute(String origin, String destination, int busId);
 }

@@ -32,11 +32,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
 		http.authorizeRequests()
-		.antMatchers("/").permitAll()
-		.antMatchers("**/api/**").authenticated()
+		.antMatchers("/api/**").authenticated()
 		.anyRequest().hasAnyRole("ADMIN","USER")
 		.and().httpBasic()
-		.and().logout().logoutUrl("/secured/api/logout");
+		.and().logout().logoutUrl("/secured/api/logout")
+		.invalidateHttpSession(true)
+		.clearAuthentication(true).permitAll();
+		
+		
 	}
 
 	@Bean

@@ -1,14 +1,10 @@
 package com.kentravels.app.service.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.kentravels.app.dto.BusSearch;
 import com.kentravels.app.dto.Customer;
-import com.kentravels.app.entity.Bus;
 import com.kentravels.app.entity.Role;
 import com.kentravels.app.entity.Ticket;
 import com.kentravels.app.entity.User;
@@ -64,10 +60,10 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
-	@Override
-	public List<Bus> searchBuses(BusSearch search) {
-		return busService.searchBuses(search);
-	}
+//	@Override
+//	public List<Bus> searchBuses(BusSearch search) {
+//		return busService.searchBuses(search);
+//	}
 
 	@Override
 	public Ticket bookTicket() {

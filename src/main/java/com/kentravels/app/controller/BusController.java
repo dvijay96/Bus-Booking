@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kentravels.app.dto.BusInfo;
-import com.kentravels.app.dto.BusSearch;
 import com.kentravels.app.entity.Bus;
 import com.kentravels.app.service.BusService;
 
@@ -36,8 +35,8 @@ public class BusController {
 	}
 
 	@PreAuthorize("hasAnyRole('ADMIN')")
-	@DeleteMapping("/bus/delete")
-	public String deleteBus(int id) {
+	@DeleteMapping("/bus/delete/{id}")
+	public String deleteBus(@PathVariable int id) {
 		return service.deleteBus(id);
 	}
 
@@ -60,20 +59,25 @@ public class BusController {
 	}
 
 	@GetMapping("/search")
-	public List<BusInfo> searchBus(@RequestBody BusSearch search) {
-		List<BusInfo> buses = new ArrayList<>();
-		for (Bus b : service.searchBuses(search)) {
-			BusInfo bus = new BusInfo();
-			bus.setBusId(b.getBusId());
-			bus.setName(b.getName());
-			bus.setType(b.getType());
-			bus.setArrivalTime(b.getArrivalTime());
-			bus.setDepartureTime(b.getDepartureTime());
-			bus.setSeats(b.getAvailableSeats());
-			bus.setFare(b.getFare());
-			buses.add(bus);
+	public Object searchBus(@RequestParam String origin, @RequestParam String destination, @RequestParam String date) {
+		try {
+			List<BusInfo> buses = new ArrayList<>();
+			for (Bus b : service.searchBuses(origin, destination, date)) {
+				BusInfo bus = new BusInfo();
+				bus.setBusId(b.getBusId());
+				bus.setName(b.getName());
+				bus.setType(b.getType());
+				bus.setArrivalTime(b.getArrivalTime());
+				bus.setDepartureTime(b.getDepartureTime());
+				bus.setSeats(b.getAvailableSeats());
+				bus.setFare(b.getFare());
+				buses.add(bus);
+			}
+			return buses;
+		} catch (Exception e) {
+			return e.getLocalizedMessage();
 		}
-		return buses;
+
 	}
 
 	@PreAuthorize("hasAnyRole('ADMIN')")

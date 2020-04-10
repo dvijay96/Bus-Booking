@@ -1,5 +1,8 @@
 package com.kentravels.app.service.impl;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -8,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kentravels.app.dto.BusInfo;
-import com.kentravels.app.dto.BusSearch;
 import com.kentravels.app.entity.Bus;
 import com.kentravels.app.entity.Route;
 import com.kentravels.app.repository.BusRepo;
@@ -24,11 +26,10 @@ public class BusServiceImpl implements BusService {
 	@Autowired
 	private RouteService routeService;
 
-
-	public BusServiceImpl() {
-		super();
-		repo.deleteBuses(new Date(System.currentTimeMillis()));
-	}
+//	public BusServiceImpl() {
+//		super();
+//		repo.deleteBuses(new Date(System.currentTimeMillis()));
+//	}
 
 	@Override
 	public void addBus(BusInfo bus) {
@@ -78,8 +79,10 @@ public class BusServiceImpl implements BusService {
 	}
 
 	@Override
-	public List<Bus> searchBuses(BusSearch bus) {
-		return repo.searchBuses(bus.getOrigin(), bus.getDestination(), bus.getDate());
+	public List<Bus> searchBuses(String origin, String destination, String date) throws ParseException {
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+		Date d = df.parse(date);
+		return repo.searchBuses(origin, destination, d);
 	}
 
 	@Override
