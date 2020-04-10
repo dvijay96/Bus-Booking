@@ -16,14 +16,15 @@
 //
 //	@GetMapping("/login")
 //	public String login(HttpServletRequest req) {
-//		return req.getUserPrincipal().getName()+" logged in";
+//		return req.getUserPrincipal().getName() + " logged in";
 //	}
+//
 //	@GetMapping("logout")
-//	public String logout(HttpServletRequest req,HttpServletResponse res) {
-//		Authentication auth=SecurityContextHolder.getContext().getAuthentication();
-//		if(auth!=null) {
+//	public String logout(HttpServletRequest req, HttpServletResponse res) {
+//		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//		if (auth != null) {
 //			new SecurityContextLogoutHandler().logout(req, res, auth);
 //		}
-//		return "logout successfull";
+//		return auth.getName() + " logged out";
 //	}
 //}
