@@ -34,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 		.antMatchers("**/api/**").authenticated()
 		.anyRequest().hasAnyRole("ADMIN","USER").and().httpBasic()
-		.and().logout();
+		.and().logout().logoutUrl("/secured/api/logout");
 	}
 
 	@Bean
