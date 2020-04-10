@@ -24,6 +24,6 @@ public class LoginLogoutController {
 		if(auth!=null) {
 			new SecurityContextLogoutHandler().logout(req, res, auth);
 		}
-		return "logout successfull";
+		return auth.getName()+ " logged out";
 	}
 }
