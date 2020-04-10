@@ -1,11 +1,13 @@
 package com.kentravels.app.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.kentravels.app.dto.UserInfo;
 import com.kentravels.app.entity.Role;
 import com.kentravels.app.entity.User;
 import com.kentravels.app.repository.UserRepo;
@@ -41,8 +43,23 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<User> getAllUsers() {
-		return userRepo.findAll();
+	public List<UserInfo> getAllUsers() {
+		List<UserInfo> users=new ArrayList<>();
+		
+		for(User u: userRepo.findAll()) {
+			
+			UserInfo user=new UserInfo();
+			user.setUserId(u.getUserId());
+			user.setFirstName(u.getFirstName());
+			user.setLastName(u.getLastName());
+			user.setDOB(u.getDOB());
+			user.setUsername(u.getUsername());
+			user.setGender(u.getGender());
+			user.setRole(u.getRole().getRole());
+			users.add(user);
+		}
+		
+		return users;
 	}
 
 	@Override
@@ -65,18 +82,31 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public User getUser(int id) {
+	public UserInfo getUser(int id) {
 		User user = userRepo.findById(id).get();
-		return user;
+
+		UserInfo info = new UserInfo();
+
+		info.setUserId(user.getUserId());
+		info.setFirstName(user.getFirstName());
+		info.setLastName(user.getLastName());
+		info.setDOB(user.getDOB());
+		info.setUsername(user.getUsername());
+		info.setGender(user.getGender());
+		info.setRole(user.getRole().getRole());
+
+		return info;
 	}
 
 	@Override
 	public String resetUserPassword(int id) {
-		User user = getUser(id);
+		User user = userRepo.findById(id).get();
+		
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		String newPass = encoder.encode(user.getFirstName() + "123");
 		user.setPassword(newPass);
 		userRepo.save(user);
+		
 		return "password reseted as user firstName+123";
 	}
 

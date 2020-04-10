@@ -2,6 +2,7 @@ package com.kentravels.app.service;
 
 import java.util.List;
 
+import com.kentravels.app.dto.UserInfo;
 import com.kentravels.app.entity.User;
 
 public interface AdminService {
@@ -12,9 +13,9 @@ public interface AdminService {
 	
 	public User updateUserRole(String role,int id);
 	
-	public User getUser(int id);
+	public UserInfo getUser(int id);
 
-	public List<User> getAllUsers();
+	public List<UserInfo> getAllUsers();
 	
 	public String resetUserPassword(int id);
 

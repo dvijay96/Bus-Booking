@@ -24,6 +24,12 @@ public class BusServiceImpl implements BusService {
 	@Autowired
 	private RouteService routeService;
 
+
+	public BusServiceImpl() {
+		super();
+		repo.deleteBuses(new Date(System.currentTimeMillis()));
+	}
+
 	@Override
 	public void addBus(BusInfo bus) {
 
@@ -79,15 +85,15 @@ public class BusServiceImpl implements BusService {
 	@Override
 	public String addBusRoute(String origin, String destination, int busId) {
 		try {
-			
-			Route route=routeService.getRoute(origin, destination);
-			if(route==null) {
+
+			Route route = routeService.getRoute(origin, destination);
+			if (route == null) {
 				return "No such route exists";
 			}
-			Bus bus=repo.findById(busId).get();
+			Bus bus = repo.findById(busId).get();
 			bus.setRoute(route);
 			repo.save(bus);
-			return "Bus_no: "+busId+" added for "+route.getOriginCity()+" --> "+route.getDestinationCity();
+			return "Bus_no: " + busId + " added for " + route.getOriginCity() + " --> " + route.getDestinationCity();
 		} catch (Exception e) {
 			return e.getLocalizedMessage();
 		}

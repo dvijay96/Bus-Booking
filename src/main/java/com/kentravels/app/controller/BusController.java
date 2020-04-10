@@ -24,32 +24,36 @@ import com.kentravels.app.service.BusService;
 
 @RestController
 @RequestMapping("/secured/api")
-@PreAuthorize("hasAnyRole('ADMIN')")
 public class BusController {
 
 	@Autowired
 	private BusService service;
 
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PostMapping("/bus/add")
 	public void addBus(@RequestBody BusInfo bus) {
 		service.addBus(bus);
 	}
 
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@DeleteMapping("/bus/delete")
 	public String deleteBus(int id) {
 		return service.deleteBus(id);
 	}
 
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PutMapping("/bus/update")
 	public String updateBus(Bus bus) {
 		return service.updateBus(bus);
 	}
 
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@GetMapping("/bus/get/{id}")
 	public ResponseEntity<?> getBus(@PathVariable int id) {
 		return new ResponseEntity<>(service.getBus(id), HttpStatus.FOUND);
 	}
 
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@GetMapping("/bus/all")
 	public List<Bus> viewAllBuses() {
 		return service.viewAllBuses();
@@ -72,6 +76,7 @@ public class BusController {
 		return buses;
 	}
 
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PutMapping("/bus/add_route")
 	public String addBusRoute(@RequestParam String origin, @RequestParam String destination, @RequestParam int id) {
 		return service.addBusRoute(origin, destination, id);
