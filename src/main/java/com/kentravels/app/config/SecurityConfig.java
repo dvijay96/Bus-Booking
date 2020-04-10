@@ -33,7 +33,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable();
 		http.authorizeRequests()
 		.antMatchers("**/api/**").authenticated()
-		.anyRequest().hasAnyRole("ADMIN","USER").and().httpBasic()
+		.anyRequest().hasAnyRole("ADMIN","USER")
+		.and().httpBasic()
 		.and().logout().logoutUrl("/secured/api/logout");
 	}
 
