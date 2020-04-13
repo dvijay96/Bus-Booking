@@ -34,14 +34,14 @@ public class Passenger {
 
 	@Column(precision = 10)
 	private long mobileNo;
-	
-	@ManyToMany(cascade = CascadeType.PERSIST)
-	@JoinTable(name = "passenger_bus", joinColumns = @JoinColumn(name = "passenger_id"), inverseJoinColumns = @JoinColumn(name = "bus_id"))
-	private Set<Bus> buses=new HashSet<>();
 
-	@OneToMany
+	@ManyToMany
+	@JoinTable(name = "passenger_bus", joinColumns = @JoinColumn(name = "passenger_id"), inverseJoinColumns = @JoinColumn(name = "bus_id"))
+	private Set<Bus> buses = new HashSet<>();
+
+	@OneToMany(cascade = CascadeType.REMOVE)
 	@JoinTable(name = "passenger_ticket", joinColumns = @JoinColumn(name = "passenger_id"), inverseJoinColumns = @JoinColumn(name = "ticket_id"))
-	private Set<Ticket> tickets;
+	private Set<Ticket> tickets = new HashSet<>();
 
 	public int getPassengerId() {
 		return passengerId;

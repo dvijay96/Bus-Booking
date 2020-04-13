@@ -20,11 +20,4 @@ public class UserController {
 		return null;
 	}
 
-//	@GetMapping("/search/bookings")
-//	public ResponseEntity<?> checkBookings(@RequestBody BusSearch booking) {
-//		return null;
-//	}
-	
-	
-
 }

@@ -1,14 +1,16 @@
 package com.kentravels.app.service;
 
+import java.util.Set;
+
 import com.kentravels.app.dto.Customer;
 import com.kentravels.app.entity.Ticket;
 
 public interface UserService {
 
 	public String addUser(Customer customer);
+
+	public void addBookings(Ticket ticket,String user);
 	
-//	public List<Bus> searchBuses(BusSearch search);
-	
-	public Ticket bookTicket();
+	public Set<Ticket> viewBookings(int id);
 
 }

@@ -16,8 +16,6 @@ public class BusInfo {
 
 	private int available_Seats;
 
-	private Set<Integer> seat_map;
-
 	@JsonFormat(shape = Shape.STRING, pattern = "HH:mm", timezone = "Asia/Kolkata")
 	private Date arrivalTime;
 
@@ -111,14 +109,6 @@ public class BusInfo {
 
 	public void setAvailable_Seats(int available_Seats) {
 		this.available_Seats = available_Seats;
-	}
-
-	public Set<Integer> getSeat_map() {
-		return seat_map;
-	}
-
-	public void setSeat_map(Set<Integer> seat_map) {
-		this.seat_map = seat_map;
 	}
 
 }

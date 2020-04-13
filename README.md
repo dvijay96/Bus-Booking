@@ -56,3 +56,15 @@ Demo project on bus booking
 	"destinationCity:"",
 	"distance":""
 }
+
+#Passenger Details || Booking
+
+{
+	"name":"",
+	"age":"",
+	"gender":"",
+	"email":"",
+	"mobileNo":,
+	"seats":,
+	"busNo":
+}

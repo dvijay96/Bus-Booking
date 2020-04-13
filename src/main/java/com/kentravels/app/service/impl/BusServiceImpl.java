@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.kentravels.app.dto.BusInfo;
 import com.kentravels.app.entity.Bus;
+import com.kentravels.app.entity.Passenger;
 import com.kentravels.app.entity.Route;
 import com.kentravels.app.repository.BusRepo;
 import com.kentravels.app.service.BusService;
@@ -26,15 +27,11 @@ public class BusServiceImpl implements BusService {
 	@Autowired
 	private RouteService routeService;
 
-//	public BusServiceImpl() {
-//		super();
-//		repo.deleteBuses(new Date(System.currentTimeMillis()));
-//	}
-
 	@Override
 	public void addBus(BusInfo bus) {
 
 		Bus newBus = new Bus();
+
 		newBus.setType(bus.getType());
 		newBus.setName(bus.getName());
 		newBus.setDate(bus.getDate());
@@ -42,6 +39,7 @@ public class BusServiceImpl implements BusService {
 		newBus.setDepartureTime(bus.getDepartureTime());
 		newBus.setSeats(bus.getAvailable_Seats());
 		newBus.setFare(bus.getFare());
+
 		repo.save(newBus);
 	}
 
@@ -97,6 +95,22 @@ public class BusServiceImpl implements BusService {
 			bus.setRoute(route);
 			repo.save(bus);
 			return "Bus_no: " + busId + " added for " + route.getOriginCity() + " --> " + route.getDestinationCity();
+		} catch (Exception e) {
+			return e.getLocalizedMessage();
+		}
+	}
+
+	@Override
+	public String addPassenger(Passenger passenger, int busId,int seats) {
+		try {
+			Bus bus = getBus(busId).get();
+			bus.getPassengers().add(passenger);
+			bus.setSeats(bus.getSeats()-seats);
+
+			repo.save(bus);
+
+			return "passenger added to bus: " + busId + "\n Route: " + bus.getRoute().getOriginCity() + " ->"
+					+ bus.getRoute().getDestinationCity();
 		} catch (Exception e) {
 			return e.getLocalizedMessage();
 		}

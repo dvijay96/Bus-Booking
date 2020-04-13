@@ -6,7 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -17,12 +16,11 @@ public class Ticket {
 	@Id
 	private int ticketId;
 
-//	private int seats;
-
 	@Temporal(TemporalType.DATE)
 	private Date date;
 
-	private int fare;
+	@Column(name = "total_fare")
+	private int totalFare;
 
 	@Column(name = "Bus_Name")
 	private String busName;
@@ -33,13 +31,45 @@ public class Ticket {
 	@Temporal(TemporalType.TIME)
 	private Date arrival;
 
-	@OneToOne
-	@JoinColumn(name = "passenger_id")
-	private Passenger passenger;
+	private String origin;
 
-	@ManyToOne
-	@JoinColumn(name = "route_id")
-	private Route route;
+	private String destination;
+
+	@OneToOne
+	@JoinColumn(name="bus_id")
+	private Bus bus;
+
+	public Bus getBus() {
+		return bus;
+	}
+
+	public void setBus(Bus bus) {
+		this.bus = bus;
+	}
+
+	public int getTotalFare() {
+		return totalFare;
+	}
+
+	public void setTotalFare(int totalFare) {
+		this.totalFare = totalFare;
+	}
+
+	public String getOrigin() {
+		return origin;
+	}
+
+	public void setOrigin(String origin) {
+		this.origin = origin;
+	}
+
+	public String getDestination() {
+		return destination;
+	}
+
+	public void setDestination(String destination) {
+		this.destination = destination;
+	}
 
 	public int getTicketId() {
 		return ticketId;
@@ -49,24 +79,16 @@ public class Ticket {
 		this.ticketId = ticketId;
 	}
 
-//	public int getSeats() {
-//		return seats;
-//	}
-//
-//	public void setSeats(int seats) {
-//		this.seats = seats;
-//	}
-
 	public Date getDate() {
 		return date;
 	}
 
 	public int getFare() {
-		return fare;
+		return totalFare;
 	}
 
-	public void setFare(int fare) {
-		this.fare = fare;
+	public void setFare(int totalFare) {
+		this.totalFare = totalFare;
 	}
 
 	public Date getDeparture() {
@@ -89,14 +111,6 @@ public class Ticket {
 		this.date = date;
 	}
 
-	public Route getRoute() {
-		return route;
-	}
-
-	public void setRoute(Route route) {
-		this.route = route;
-	}
-
 	public String getBusName() {
 		return busName;
 	}
@@ -105,12 +119,11 @@ public class Ticket {
 		this.busName = busName;
 	}
 
-	public Passenger getPassenger() {
-		return passenger;
-	}
-
-	public void setPassenger(Passenger passenger) {
-		this.passenger = passenger;
+	@Override
+	public String toString() {
+		return "Ticket ==> [ticketId=" + ticketId + "\n date=" + date + "\n totalFare=" + totalFare + "\n busName="
+				+ busName + "\n departure=" + departure + "\n arrival=" + arrival + "\n origin=" + origin
+				+ "\n destination=" + destination + "]";
 	}
 
 }

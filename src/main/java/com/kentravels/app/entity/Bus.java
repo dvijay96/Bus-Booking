@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Embedded;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -31,8 +31,8 @@ public class Bus {
 
 	private String name;
 
-	@Embedded
-	private Set<Integer> seats = new HashSet<>();
+	@Column(name = "available_seats")
+	private int seats;
 
 	@Temporal(TemporalType.TIME)
 	private Date arrivalTime;
@@ -85,14 +85,12 @@ public class Bus {
 		this.type = type;
 	}
 
-	public Set<Integer> getSeats() {
+	public int getSeats() {
 		return seats;
 	}
 
 	public void setSeats(int seats) {
-		for (int i = 1; i <= seats; i++) {
-			this.seats.add(i);
-		}
+		this.seats = seats;
 	}
 
 	public Date getArrivalTime() {
