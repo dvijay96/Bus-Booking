@@ -35,7 +35,6 @@ public class Bus {
 	private Set<Integer> seats = new HashSet<>();
 
 	@Temporal(TemporalType.TIME)
-//	@JsonFormat(shape = Shape.STRING, pattern = "HH:mm")
 	private Date arrivalTime;
 
 	@Temporal(TemporalType.TIME)

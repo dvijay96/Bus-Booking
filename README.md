@@ -33,7 +33,7 @@ Demo project on bus booking
 {
 	 "type": "",
      "name": "",
-     "availableSeats": 0,
+     "available_Seats": 0,
      "arrivalTime": "",
      "departureTime": "",
      "fare": 700,
@@ -44,7 +44,7 @@ Demo project on bus booking
 
 {
 	"origin":"",
-	"destination:"",
+	"destination":"",
 	"busId":""
 }
 
