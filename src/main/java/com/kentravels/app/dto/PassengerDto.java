@@ -1,9 +1,11 @@
 package com.kentravels.app.dto;
 
+import java.io.Serializable;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
-public class PassengerDto {
+public class PassengerDto implements Serializable {
 
 	private String name;
 
