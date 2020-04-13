@@ -2,6 +2,7 @@ package com.kentravels.app.entity;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -35,8 +36,8 @@ public class Ticket {
 
 	private String destination;
 
-	@OneToOne
-	@JoinColumn(name="bus_id")
+	@OneToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "bus_id")
 	private Bus bus;
 
 	public Bus getBus() {

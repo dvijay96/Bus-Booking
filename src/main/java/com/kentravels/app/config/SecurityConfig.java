@@ -1,3 +1,4 @@
+
 package com.kentravels.app.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
+
 @EnableWebSecurity
+
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -30,16 +33,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		
+
 		http.csrf().disable();
-		http.authorizeRequests()
-		.antMatchers("/api/**").authenticated()
-		.anyRequest().hasAnyRole("ADMIN","USER")
-		.and().httpBasic()
-		.and().logout().logoutUrl("/secured/api/logout")
-		.invalidateHttpSession(true)
-		.clearAuthentication(true).permitAll();
-		
+		http.authorizeRequests().antMatchers("/api/**").authenticated().anyRequest().hasAnyRole("ADMIN", "USER").and()
+				.httpBasic().and().logout().logoutUrl("/secured/api/logout").invalidateHttpSession(true)
+				.clearAuthentication(true).permitAll();
+
 	}
 
 	@Bean

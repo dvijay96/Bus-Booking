@@ -1,5 +1,7 @@
 package com.kentravels.app.controller;
 
+import java.util.Set;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kentravels.app.dto.PassengerDto;
+import com.kentravels.app.entity.Ticket;
 import com.kentravels.app.service.PassengerService;
 import com.kentravels.app.service.TicketService;
 
@@ -37,7 +40,8 @@ public class BookingContoller {
 	}
 
 	@DeleteMapping("/cancel/ticket/{id}")
-	public String cancel(@PathVariable int ticketId) {
-		return ticketService.deleteTicket(ticketId);
+	public String cancel(@PathVariable int id) {
+		return ticketService.deleteTicket(id);
 	}
+	
 }

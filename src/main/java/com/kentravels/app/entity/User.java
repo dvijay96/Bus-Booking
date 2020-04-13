@@ -47,7 +47,7 @@ public class User {
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Role role;
 
-	@OneToMany(cascade = CascadeType.REMOVE)
+	@OneToMany
 	@JoinTable(name = "user_ticket", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "ticket_id"))
 	private Set<Ticket> bookings;
 

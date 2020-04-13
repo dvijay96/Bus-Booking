@@ -76,7 +76,7 @@ public class PassengerServiceImpl implements PassengerService {
 
 	@Override
 	public Passenger findPassenger(int ticketId) {
-		return repo.findByTicket(ticketId);
+		return repo.findByTickets(ticketId);
 	}
 
 }
