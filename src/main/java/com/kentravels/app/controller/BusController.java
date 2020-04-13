@@ -70,7 +70,8 @@ public class BusController {
 				bus.setType(b.getType());
 				bus.setArrivalTime(b.getArrivalTime());
 				bus.setDepartureTime(b.getDepartureTime());
-				bus.setSeats(b.getAvailableSeats());
+				bus.setAvailable_Seats(b.getSeats().size());
+				bus.setSeat_map(b.getSeats());
 				bus.setFare(b.getFare());
 				buses.add(bus);
 			}

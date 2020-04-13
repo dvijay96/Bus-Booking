@@ -40,7 +40,7 @@ public class BusServiceImpl implements BusService {
 		newBus.setDate(bus.getDate());
 		newBus.setArrivalTime(bus.getArrivalTime());
 		newBus.setDepartureTime(bus.getDepartureTime());
-		newBus.setAvailableSeats(bus.getSeats());
+		newBus.setSeats(bus.getAvailable_Seats());
 		newBus.setFare(bus.getFare());
 		repo.save(newBus);
 	}

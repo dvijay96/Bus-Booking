@@ -1,6 +1,7 @@
 package com.kentravels.app.dto;
 
 import java.util.Date;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
@@ -13,18 +14,17 @@ public class BusInfo {
 
 	private String type;
 
-	private int seats;
+	private int available_Seats;
 
-//	@Temporal(TemporalType.TIME)
-	@JsonFormat(shape = Shape.STRING, pattern = "HH:mm",timezone = "Asia/Kolkata")
+	private Set<Integer> seat_map;
+
+	@JsonFormat(shape = Shape.STRING, pattern = "HH:mm", timezone = "Asia/Kolkata")
 	private Date arrivalTime;
 
-//	@Temporal(TemporalType.TIME)
-	@JsonFormat(shape = Shape.STRING, pattern = "HH:mm",timezone = "Asia/Kolkata")
+	@JsonFormat(shape = Shape.STRING, pattern = "HH:mm", timezone = "Asia/Kolkata")
 	private Date departureTime;
 
-//	@Temporal(TemporalType.DATE)
-	@JsonFormat(shape = Shape.STRING, pattern = "dd/MM/yyyy",timezone = "Asia/Kolkata")
+	@JsonFormat(shape = Shape.STRING, pattern = "dd/MM/yyyy", timezone = "Asia/Kolkata")
 	private Date date;
 
 	private int fare;
@@ -65,14 +65,6 @@ public class BusInfo {
 		this.type = type;
 	}
 
-	public int getSeats() {
-		return seats;
-	}
-
-	public void setSeats(int seats) {
-		this.seats = seats;
-	}
-
 	public Date getArrivalTime() {
 		return arrivalTime;
 	}
@@ -111,6 +103,22 @@ public class BusInfo {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public int getAvailable_Seats() {
+		return available_Seats;
+	}
+
+	public void setAvailable_Seats(int available_Seats) {
+		this.available_Seats = available_Seats;
+	}
+
+	public Set<Integer> getSeat_map() {
+		return seat_map;
+	}
+
+	public void setSeat_map(Set<Integer> seat_map) {
+		this.seat_map = seat_map;
 	}
 
 }

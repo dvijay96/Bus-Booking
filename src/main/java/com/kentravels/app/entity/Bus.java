@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -31,21 +31,19 @@ public class Bus {
 
 	private String name;
 
-	@Column(precision = 2)
-	private int availableSeats;
+	@Embedded
+	private Set<Integer> seats = new HashSet<>();
 
 	@Temporal(TemporalType.TIME)
 //	@JsonFormat(shape = Shape.STRING, pattern = "HH:mm")
 	private Date arrivalTime;
 
 	@Temporal(TemporalType.TIME)
-//	@JsonFormat(shape = Shape.STRING, pattern = "HH:mm")
 	private Date departureTime;
 
 	private int fare;
 
 	@Temporal(TemporalType.DATE)
-//	@JsonFormat(shape = Shape.STRING, pattern = "dd/MM/yyyy")
 	private Date date;
 
 	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
@@ -56,7 +54,6 @@ public class Bus {
 	@JoinTable(name = "bus_passenger", joinColumns = @JoinColumn(name = "bus_id"), inverseJoinColumns = @JoinColumn(name = "passenger_id"))
 	private Set<Passenger> passengers = new HashSet<>();
 
-	
 	public Set<Passenger> getPassengers() {
 		return passengers;
 	}
@@ -89,12 +86,14 @@ public class Bus {
 		this.type = type;
 	}
 
-	public int getAvailableSeats() {
-		return availableSeats;
+	public Set<Integer> getSeats() {
+		return seats;
 	}
 
-	public void setAvailableSeats(int availableSeats) {
-		this.availableSeats = availableSeats;
+	public void setSeats(int seats) {
+		for (int i = 1; i <= seats; i++) {
+			this.seats.add(i);
+		}
 	}
 
 	public Date getArrivalTime() {
