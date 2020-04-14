@@ -1,11 +1,8 @@
 package com.kentravels.app.controller;
 
-import java.util.Set;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kentravels.app.dto.PassengerDto;
-import com.kentravels.app.entity.Ticket;
 import com.kentravels.app.service.PassengerService;
 import com.kentravels.app.service.TicketService;
 
@@ -29,9 +25,10 @@ public class BookingContoller {
 	private TicketService ticketService;
 
 	@PostMapping("/book/ticket")
-	public String bookBus(@RequestBody PassengerDto passenger, HttpServletRequest req, HttpServletResponse res) {
+	public String bookBus(@RequestBody PassengerDto passenger) {
 		try {
-				String user=req.getUserPrincipal().getName();
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+				String user=auth.getName();
 			return service.addPassenger(passenger,user);
 
 		} catch (Exception e) {

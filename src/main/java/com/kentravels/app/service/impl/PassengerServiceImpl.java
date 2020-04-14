@@ -2,6 +2,8 @@ package com.kentravels.app.service.impl;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,7 @@ import com.kentravels.app.service.TicketService;
 import com.kentravels.app.service.UserService;
 
 @Service
+@Transactional
 public class PassengerServiceImpl implements PassengerService {
 
 	@Autowired
@@ -44,9 +47,7 @@ public class PassengerServiceImpl implements PassengerService {
 			passenger.setGender(p.getGender());
 			passenger.setEmail(p.getEmail());
 			passenger.setMobileNo(p.getMobileNo());
-			passenger.getBuses().add(bus);
-			passenger.getTickets().add(ticket);
-			repo.save(passenger);
+			passenger.setTicket(ticket);
 
 			String passAdd = busService.addPassenger(passenger, bus.getBusId(), p.getSeats());
 

@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kentravels.app.entity.Bus;
-import com.kentravels.app.entity.Passenger;
 import com.kentravels.app.entity.Ticket;
 import com.kentravels.app.repository.TicketRepo;
 import com.kentravels.app.service.PassengerService;
@@ -33,7 +32,7 @@ public class TicketServiceImpl implements TicketService {
 		ticket.setArrival(bus.getArrivalTime());
 		ticket.setFare(seats * bus.getFare());
 
-		return repo.save(ticket);
+		return ticket;
 	}
 
 	@Override

@@ -59,6 +59,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void addBookings(Ticket ticket, String user) {
 		User u = userRepo.findByUsername(user);
+		ticket.setUser(u);
 		u.getBookings().add(ticket);
 		userRepo.save(u);
 	}
