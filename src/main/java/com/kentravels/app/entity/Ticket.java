@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -39,9 +40,32 @@ public class Ticket {
 
 	private String destination;
 
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne
 	@JoinColumn(name = "bus_id")
 	private Bus bus;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "passenger_id")
+	private Passenger passenger;
+
+	@ManyToOne
+	private User user;
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Passenger getPassenger() {
+		return passenger;
+	}
+
+	public void setPassenger(Passenger passenger) {
+		this.passenger = passenger;
+	}
 
 	public Bus getBus() {
 		return bus;

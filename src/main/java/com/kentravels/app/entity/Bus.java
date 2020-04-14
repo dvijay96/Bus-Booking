@@ -49,7 +49,7 @@ public class Bus {
 	@JoinTable(name = "bus_route", joinColumns = @JoinColumn(name = "bus_id"), inverseJoinColumns = @JoinColumn(name = "route_id"))
 	private Route route;
 
-	@ManyToMany(cascade = CascadeType.PERSIST)
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "bus_passenger", joinColumns = @JoinColumn(name = "bus_id"), inverseJoinColumns = @JoinColumn(name = "passenger_id"))
 	private Set<Passenger> passengers = new HashSet<>();
 
