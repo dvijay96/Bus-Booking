@@ -83,7 +83,7 @@ public class Passenger {
 		this.mobileNo = mobileNo;
 	}
 
-	public Ticket getTickets() {
+	public Ticket getTicket() {
 		return ticket;
 	}
 

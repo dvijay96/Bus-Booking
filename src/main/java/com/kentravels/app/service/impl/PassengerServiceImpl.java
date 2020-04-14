@@ -47,17 +47,12 @@ public class PassengerServiceImpl implements PassengerService {
 			passenger.setGender(p.getGender());
 			passenger.setEmail(p.getEmail());
 			passenger.setMobileNo(p.getMobileNo());
-<<<<<<< HEAD
-			passenger.getBuses().add(bus);
-			passenger.getTickets().add(ticket);
-=======
 			passenger.setTicket(ticket);
 //			repo.save(passenger);
->>>>>>> e9edaf3541e2fae6bec0b23ad5e282516aac306b
 
 			String passAdd = busService.addPassenger(passenger, bus.getBusId(), p.getSeats());
 
-			userService.addBookings(passenger.getTickets(), user);
+			userService.addBookings(passenger.getTicket(), user);
 
 			return passAdd + "with ticket " + ticket.toString();
 		} catch (Exception e) {
@@ -84,7 +79,7 @@ public class PassengerServiceImpl implements PassengerService {
 
 	@Override
 	public Passenger findPassenger(int ticketId) {
-		return repo.findByTickets(ticketId);
+		return repo.findByTicket(ticketId);
 	}
 
 }

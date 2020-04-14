@@ -8,5 +8,5 @@ import com.kentravels.app.entity.Passenger;
 @Repository
 public interface PassengerRepo extends JpaRepository<Passenger, Integer> {
 
-	public Passenger findByTickets(int ticketId);
+	public Passenger findByTicket(int ticketId);
 }
