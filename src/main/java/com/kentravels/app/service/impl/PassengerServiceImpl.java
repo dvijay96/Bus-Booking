@@ -46,7 +46,6 @@ public class PassengerServiceImpl implements PassengerService {
 			passenger.setMobileNo(p.getMobileNo());
 			passenger.getBuses().add(bus);
 			passenger.getTickets().add(ticket);
-//			repo.save(passenger);
 
 			String passAdd = busService.addPassenger(passenger, bus.getBusId(), p.getSeats());
 
