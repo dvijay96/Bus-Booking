@@ -4,10 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kentravels.app.entity.Bus;
+import com.kentravels.app.entity.Passenger;
 import com.kentravels.app.entity.Ticket;
 import com.kentravels.app.repository.TicketRepo;
+import com.kentravels.app.service.BusService;
 import com.kentravels.app.service.PassengerService;
 import com.kentravels.app.service.TicketService;
+import com.kentravels.app.service.UserService;
 
 @Service
 public class TicketServiceImpl implements TicketService {
@@ -17,6 +20,12 @@ public class TicketServiceImpl implements TicketService {
 
 	@Autowired
 	private PassengerService pService;
+
+	@Autowired
+	private BusService busService;
+
+	@Autowired
+	private UserService userService;
 
 	@Override
 	public Ticket generateTicket(Bus bus, int seats) {
@@ -41,7 +50,20 @@ public class TicketServiceImpl implements TicketService {
 
 			Ticket ticket = repo.findById(id).get();
 
-			repo.delete(ticket);
+			Passenger passenger = pService.findPassenger(id);
+
+			Bus bus = ticket.getBus();
+
+			if (!bus.getPassengers().contains(passenger)) {
+				return "Passenger doesn't exists";
+			}
+			bus.getPassengers().remove(passenger);
+			bus.setSeats(bus.getSeats() + (ticket.getFare() / bus.getFare()));
+			busService.updateBus(bus);
+
+			pService.deletePassenger(passenger.getPassengerId());
+			
+			
 
 			return "ticket cancelled";
 

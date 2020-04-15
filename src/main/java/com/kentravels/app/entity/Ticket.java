@@ -44,11 +44,13 @@ public class Ticket {
 	@JoinColumn(name = "bus_id")
 	private Bus bus;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "passenger_id")
-	private Passenger passenger;
+	/*
+	 * @OneToOne(cascade=CascadeType.MERGE) // @JoinColumn(name = "passenger_id")
+	 * private Passenger passenger;
+	 */
 
 	@ManyToOne
+	@JoinColumn(name="user_id")
 	private User user;
 
 	public User getUser() {
@@ -59,13 +61,11 @@ public class Ticket {
 		this.user = user;
 	}
 
-	public Passenger getPassenger() {
-		return passenger;
-	}
-
-	public void setPassenger(Passenger passenger) {
-		this.passenger = passenger;
-	}
+	/*
+	 * public Passenger getPassenger() { return passenger; }
+	 * 
+	 * public void setPassenger(Passenger passenger) { this.passenger = passenger; }
+	 */
 
 	public Bus getBus() {
 		return bus;

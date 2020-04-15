@@ -7,7 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
@@ -31,8 +30,9 @@ public class Passenger {
 	@Column(precision = 10)
 	private long mobileNo;
 
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "passenger")
-	@JoinTable(name = "passenger_ticket", joinColumns = @JoinColumn(name = "passenger_id"), inverseJoinColumns = @JoinColumn(name = "ticket_id"))
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="ticket_id")
+//	@JoinTable(name = "passenger_ticket", joinColumns = @JoinColumn(name = "passenger_id"), inverseJoinColumns = @JoinColumn(name = "ticket_id"))
 	private Ticket ticket;
 
 	public int getPassengerId() {

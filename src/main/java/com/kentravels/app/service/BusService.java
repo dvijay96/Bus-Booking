@@ -26,5 +26,6 @@ public interface BusService {
 
 	public String addBusRoute(String origin, String destination, int busId);
 
-	public String addPassenger(Passenger passenger,int busId,int seats);
+	public String addPassenger(Passenger passenger, int busId, int seats);
+
 }

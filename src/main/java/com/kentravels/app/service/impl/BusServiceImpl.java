@@ -16,6 +16,7 @@ import com.kentravels.app.entity.Passenger;
 import com.kentravels.app.entity.Route;
 import com.kentravels.app.repository.BusRepo;
 import com.kentravels.app.service.BusService;
+import com.kentravels.app.service.PassengerService;
 import com.kentravels.app.service.RouteService;
 
 @Service
@@ -26,6 +27,9 @@ public class BusServiceImpl implements BusService {
 
 	@Autowired
 	private RouteService routeService;
+
+	@Autowired
+	private PassengerService pService;
 
 	@Override
 	public void addBus(BusInfo bus) {
@@ -101,11 +105,11 @@ public class BusServiceImpl implements BusService {
 	}
 
 	@Override
-	public String addPassenger(Passenger passenger, int busId,int seats) {
+	public String addPassenger(Passenger passenger, int busId, int seats) {
 		try {
 			Bus bus = getBus(busId).get();
 			bus.getPassengers().add(passenger);
-			bus.setSeats(bus.getSeats()-seats);
+			bus.setSeats(bus.getSeats() - seats);
 
 			repo.save(bus);
 

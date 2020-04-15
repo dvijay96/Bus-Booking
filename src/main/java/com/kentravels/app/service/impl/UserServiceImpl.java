@@ -71,4 +71,10 @@ public class UserServiceImpl implements UserService {
 		return user.getBookings();
 	}
 
+	@Override
+	public void updateUser(User user) {
+
+		userRepo.save(user);
+	}
+
 }

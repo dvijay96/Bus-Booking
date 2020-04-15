@@ -46,7 +46,8 @@ public class Bus {
 	private Date date;
 
 	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-	@JoinTable(name = "bus_route", joinColumns = @JoinColumn(name = "bus_id"), inverseJoinColumns = @JoinColumn(name = "route_id"))
+	@JoinColumn(name="route_id")
+//	@JoinTable(name = "bus_route", joinColumns = @JoinColumn(name = "bus_id"), inverseJoinColumns = @JoinColumn(name = "route_id"))
 	private Route route;
 
 	@ManyToMany(cascade = CascadeType.ALL)
