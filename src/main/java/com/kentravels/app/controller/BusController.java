@@ -2,6 +2,7 @@ package com.kentravels.app.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kentravels.app.dto.BusInfo;
 import com.kentravels.app.dto.BusRoute;
 import com.kentravels.app.entity.Bus;
+import com.kentravels.app.entity.Passenger;
 import com.kentravels.app.service.BusService;
 
 @RestController
@@ -55,8 +57,27 @@ public class BusController {
 
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@GetMapping("/bus/all")
-	public List<Bus> viewAllBuses() {
-		return service.viewAllBuses();
+	public List<BusInfo> viewAllBuses() {
+
+		List<BusInfo> buses = new ArrayList<>();
+		
+		for (Bus b : service.viewAllBuses()) {
+			BusInfo bus = new BusInfo();
+			bus.setBusId(b.getBusId());
+			bus.setName(b.getName());
+			bus.setType(b.getType());
+			bus.setArrivalTime(b.getArrivalTime());
+			bus.setDepartureTime(b.getDepartureTime());
+			bus.setAvailable_Seats(b.getSeats());
+			bus.setFare(b.getFare());
+			bus.setOrigin(b.getRoute().getOriginCity());
+			bus.setDestination(b.getRoute().getDestinationCity());
+			bus.setDate(b.getDate());
+			
+			buses.add(bus);
+		}
+		
+		return buses;
 	}
 
 	@GetMapping("/bus/search")
@@ -85,5 +106,11 @@ public class BusController {
 	@PutMapping("/bus/add_route")
 	public String addBusRoute(@RequestBody BusRoute add) {
 		return service.addBusRoute(add.getOrigin(), add.getDestination(), add.getBusId());
+	}
+	
+	@GetMapping("/bus/passengers/{id}")
+	public Set<Passenger> onBoardPassengers(@PathVariable int id){
+		Bus bus=service.getBus(id).get();
+		return bus.getPassengers();
 	}
 }
