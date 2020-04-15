@@ -16,4 +16,6 @@ public interface UserService {
 
 	public void updateUser(User user);
 
+	public void removeBooking(Ticket ticket,String user);
+
 }

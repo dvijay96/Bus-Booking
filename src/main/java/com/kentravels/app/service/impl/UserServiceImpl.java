@@ -68,6 +68,7 @@ public class UserServiceImpl implements UserService {
 	public Set<Ticket> viewBookings(String username) {
 
 		User user = userRepo.findByUsername(username);
+		
 		return user.getBookings();
 	}
 
@@ -75,6 +76,14 @@ public class UserServiceImpl implements UserService {
 	public void updateUser(User user) {
 
 		userRepo.save(user);
+	}
+
+	@Override
+	public void removeBooking(Ticket ticket, String username) {
+		User user = userRepo.findByUsername(username);
+		user.getBookings().remove(ticket);
+		updateUser(user);
+
 	}
 
 }

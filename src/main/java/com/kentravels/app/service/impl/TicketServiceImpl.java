@@ -61,15 +61,19 @@ public class TicketServiceImpl implements TicketService {
 				return "Passenger doesn't exists";
 			}
 
-			if (verifyUser(ticket, user)) {
+			if (!verifyUser(ticket, user)) {
 				return "you don't own this ticket";
 			}
 
 			bus.getPassengers().remove(passenger);
-			bus.setSeats(bus.getSeats() + (ticket.getFare() / bus.getFare()));
+			bus.setSeats(bus.getSeats() + ticket.getSeats());
 			busService.updateBus(bus);
 
 			pService.deletePassenger(passenger.getPassengerId());
+
+			userService.removeBooking(ticket, user);
+
+			repo.delete(ticket);
 
 			return "ticket cancelled";
 

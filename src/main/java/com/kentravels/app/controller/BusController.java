@@ -108,6 +108,7 @@ public class BusController {
 		return service.addBusRoute(add.getOrigin(), add.getDestination(), add.getBusId());
 	}
 	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@GetMapping("/bus/passengers/{id}")
 	public Set<Passenger> onBoardPassengers(@PathVariable int id){
 		Bus bus=service.getBus(id).get();

@@ -38,6 +38,9 @@ public class PassengerServiceImpl implements PassengerService {
 		try {
 			Bus bus = busService.getBus(p.getBusNo()).get();
 
+			if (bus.getSeats() < p.getSeats()) {
+				return "Bus is Full";
+			}
 			Ticket ticket = ticketService.generateTicket(bus, p.getSeats());
 
 			Passenger passenger = new Passenger();
