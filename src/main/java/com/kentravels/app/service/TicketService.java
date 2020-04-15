@@ -7,6 +7,6 @@ public interface TicketService {
 
 	public Ticket generateTicket(Bus bus,int seats);
 	
-	public String deleteTicket(int id);
+	public String deleteTicket(int id,String user);
 }
 

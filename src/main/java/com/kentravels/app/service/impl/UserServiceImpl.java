@@ -65,9 +65,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Set<Ticket> viewBookings(int id) {
+	public Set<Ticket> viewBookings(String username) {
 
-		User user = userRepo.findById(id).get();
+		User user = userRepo.findByUsername(username);
 		return user.getBookings();
 	}
 

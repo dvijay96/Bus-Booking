@@ -2,7 +2,6 @@ package com.kentravels.app.entity;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,6 +35,8 @@ public class Ticket {
 	@Temporal(TemporalType.TIME)
 	private Date arrival;
 
+	private int seats;
+
 	private String origin;
 
 	private String destination;
@@ -50,7 +51,7 @@ public class Ticket {
 	 */
 
 	@ManyToOne
-	@JoinColumn(name="user_id")
+	@JoinColumn(name = "user_id")
 	private User user;
 
 	public User getUser() {
@@ -145,6 +146,14 @@ public class Ticket {
 
 	public void setBusName(String busName) {
 		this.busName = busName;
+	}
+
+	public int getSeats() {
+		return seats;
+	}
+
+	public void setSeats(int seats) {
+		this.seats = seats;
 	}
 
 	@Override

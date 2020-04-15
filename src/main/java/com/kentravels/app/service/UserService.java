@@ -12,7 +12,7 @@ public interface UserService {
 
 	public void addBookings(Ticket ticket, String user);
 
-	public Set<Ticket> viewBookings(int id);
+	public Set<Ticket> viewBookings(String user);
 
 	public void updateUser(User user);
 

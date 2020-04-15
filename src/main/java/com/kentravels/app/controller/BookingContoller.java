@@ -28,8 +28,8 @@ public class BookingContoller {
 	public String bookBus(@RequestBody PassengerDto passenger) {
 		try {
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-				String user=auth.getName();
-			return service.addPassenger(passenger,user);
+			String user = auth.getName();
+			return service.addPassenger(passenger, user);
 
 		} catch (Exception e) {
 			return e.getLocalizedMessage();
@@ -38,7 +38,9 @@ public class BookingContoller {
 
 	@DeleteMapping("/cancel/ticket/{id}")
 	public String cancel(@PathVariable int id) {
-		return ticketService.deleteTicket(id);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String user = auth.getName();
+		return ticketService.deleteTicket(id, user);
 	}
-	
+
 }

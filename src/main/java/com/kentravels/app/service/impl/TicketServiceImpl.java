@@ -1,5 +1,7 @@
 package com.kentravels.app.service.impl;
 
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,13 +41,14 @@ public class TicketServiceImpl implements TicketService {
 		ticket.setDestination(bus.getRoute().getDestinationCity());
 		ticket.setDeparture(bus.getDepartureTime());
 		ticket.setArrival(bus.getArrivalTime());
+		ticket.setSeats(seats);
 		ticket.setFare(seats * bus.getFare());
 
 		return ticket;
 	}
 
 	@Override
-	public String deleteTicket(int id) {
+	public String deleteTicket(int id, String user) {
 		try {
 
 			Ticket ticket = repo.findById(id).get();
@@ -57,13 +60,16 @@ public class TicketServiceImpl implements TicketService {
 			if (!bus.getPassengers().contains(passenger)) {
 				return "Passenger doesn't exists";
 			}
+
+			if (verifyUser(ticket, user)) {
+				return "you don't own this ticket";
+			}
+
 			bus.getPassengers().remove(passenger);
 			bus.setSeats(bus.getSeats() + (ticket.getFare() / bus.getFare()));
 			busService.updateBus(bus);
 
 			pService.deletePassenger(passenger.getPassengerId());
-			
-			
 
 			return "ticket cancelled";
 
@@ -72,4 +78,11 @@ public class TicketServiceImpl implements TicketService {
 		}
 	}
 
+	public boolean verifyUser(Ticket ticket, String user) {
+
+		Set<Ticket> tickets = userService.viewBookings(user);
+		if (tickets.contains(ticket))
+			return true;
+		return false;
+	}
 }
