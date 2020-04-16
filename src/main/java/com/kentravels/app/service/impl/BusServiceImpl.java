@@ -1,5 +1,6 @@
 package com.kentravels.app.service.impl;
 
+import java.sql.Time;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -84,7 +85,9 @@ public class BusServiceImpl implements BusService {
 	public List<Bus> searchBuses(String origin, String destination, String date) throws ParseException {
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 		Date d = df.parse(date);
-		return repo.searchBuses(origin, destination, d);
+		
+		Time t=new Time(System.currentTimeMillis());
+		return repo.searchBuses(origin, destination, d,t);
 	}
 
 	@Override
