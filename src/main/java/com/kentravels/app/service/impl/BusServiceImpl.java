@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,9 +61,22 @@ public class BusServiceImpl implements BusService {
 	}
 
 	@Override
-	public String updateBus(Bus bus) {
-		repo.save(bus);
-		return "bus updated";
+	public String updateBusTime(String arrival, String departure, int id) {
+		try {
+			Bus bus = getBus(id).get();
+			SimpleDateFormat df = new SimpleDateFormat("HH:mm");
+			Date arrivalTime = df.parse(arrival);
+			Date departureTime = df.parse(departure);
+
+			bus.setArrivalTime(arrivalTime);
+			bus.setDepartureTime(departureTime);
+
+			repo.save(bus);
+			return "bus's time updated";
+			
+		} catch (Exception e) {
+			return e.getLocalizedMessage();
+		}
 	}
 
 	@Override
@@ -85,9 +99,8 @@ public class BusServiceImpl implements BusService {
 	public List<Bus> searchBuses(String origin, String destination, String date) throws ParseException {
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 		Date d = df.parse(date);
-		
-		Time t=new Time(System.currentTimeMillis());
-		return repo.searchBuses(origin, destination, d,t);
+		Time t = new Time(System.currentTimeMillis());
+		return repo.searchBuses(origin, destination, d, t);
 	}
 
 	@Override
@@ -121,6 +134,18 @@ public class BusServiceImpl implements BusService {
 		} catch (Exception e) {
 			return e.getLocalizedMessage();
 		}
+	}
+
+	@Override
+	public Set<Passenger> viewPassengers(int id) {
+		Bus bus = getBus(id).get();
+		return bus.getPassengers();
+	}
+
+	@Override
+	public void updateBus(Bus bus) {
+
+		repo.save(bus);
 	}
 
 }

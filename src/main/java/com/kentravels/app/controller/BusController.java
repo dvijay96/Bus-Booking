@@ -1,6 +1,7 @@
 package com.kentravels.app.controller;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kentravels.app.dto.BusInfo;
 import com.kentravels.app.dto.BusRoute;
+import com.kentravels.app.dto.PassengerDto;
 import com.kentravels.app.entity.Bus;
 import com.kentravels.app.entity.Passenger;
 import com.kentravels.app.service.BusService;
@@ -44,9 +46,9 @@ public class BusController {
 	}
 
 	@PreAuthorize("hasAnyRole('ADMIN')")
-	@PutMapping("/bus/update")
-	public String updateBus(Bus bus) {
-		return service.updateBus(bus);
+	@PutMapping("/bus/update/time")
+	public String updateBusTime(@RequestParam String arrival,@RequestParam String departure,@RequestParam int busId) {
+		return service.updateBusTime(arrival, departure, busId);
 	}
 
 	@PreAuthorize("hasAnyRole('ADMIN')")
@@ -60,7 +62,7 @@ public class BusController {
 	public List<BusInfo> viewAllBuses() {
 
 		List<BusInfo> buses = new ArrayList<>();
-		
+
 		for (Bus b : service.viewAllBuses()) {
 			BusInfo bus = new BusInfo();
 			bus.setBusId(b.getBusId());
@@ -73,10 +75,10 @@ public class BusController {
 			bus.setOrigin(b.getRoute().getOriginCity());
 			bus.setDestination(b.getRoute().getDestinationCity());
 			bus.setDate(b.getDate());
-			
+
 			buses.add(bus);
 		}
-		
+
 		return buses;
 	}
 
@@ -107,11 +109,28 @@ public class BusController {
 	public String addBusRoute(@RequestBody BusRoute add) {
 		return service.addBusRoute(add.getOrigin(), add.getDestination(), add.getBusId());
 	}
-	
+
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@GetMapping("/bus/passengers/{id}")
-	public Set<Passenger> onBoardPassengers(@PathVariable int id){
-		Bus bus=service.getBus(id).get();
-		return bus.getPassengers();
+	public Set<PassengerDto> onBoardPassengers(@PathVariable int id) {
+
+		Set<PassengerDto> passengersList = new HashSet<>();
+
+		for (Passenger p : service.viewPassengers(id)) {
+
+			PassengerDto passenger = new PassengerDto();
+
+			passenger.setName(p.getPassengerName());
+			passenger.setGender(p.getGender());
+			passenger.setAge(p.getAge());
+			passenger.setEmail(p.getEmail());
+			passenger.setMobileNo(p.getMobileNo());
+			passenger.setBusNo(p.getTicket().getBus().getBusId());
+			passenger.setSeats(p.getTicket().getSeats());
+
+			passengersList.add(passenger);
+		}
+
+		return passengersList;
 	}
 }
