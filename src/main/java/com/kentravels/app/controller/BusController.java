@@ -35,8 +35,8 @@ public class BusController {
 
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PostMapping("/bus/add")
-	public void addBus(@RequestBody BusInfo bus) {
-		service.addBus(bus);
+	public String addBus(@RequestBody BusInfo bus) {
+		return service.addBus(bus);
 	}
 
 	@PreAuthorize("hasAnyRole('ADMIN')")
@@ -47,7 +47,7 @@ public class BusController {
 
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PutMapping("/bus/update/time")
-	public String updateBusTime(@RequestParam String arrival,@RequestParam String departure,@RequestParam int busId) {
+	public String updateBusTime(@RequestParam String arrival, @RequestParam String departure, @RequestParam int busId) {
 		return service.updateBusTime(arrival, departure, busId);
 	}
 

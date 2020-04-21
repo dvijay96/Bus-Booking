@@ -34,7 +34,7 @@ public class BusServiceImpl implements BusService {
 	private PassengerService pService;
 
 	@Override
-	public void addBus(BusInfo bus) {
+	public String addBus(BusInfo bus) {
 
 		Bus newBus = new Bus();
 
@@ -47,6 +47,8 @@ public class BusServiceImpl implements BusService {
 		newBus.setFare(bus.getFare());
 
 		repo.save(newBus);
+		
+		return "Bus Added";
 	}
 
 	@Override

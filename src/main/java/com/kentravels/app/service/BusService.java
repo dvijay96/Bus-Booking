@@ -11,7 +11,7 @@ import com.kentravels.app.entity.Passenger;
 
 public interface BusService {
 
-	public void addBus(BusInfo bus);
+	public String addBus(BusInfo bus);
 
 	public String deleteBus(int id);
 	
